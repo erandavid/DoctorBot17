@@ -5,6 +5,7 @@ A simple echo bot for the Microsoft Bot Framework.
 var restify = require('restify');
 var builder = require('botbuilder');
 var botbuilder_azure = require("botbuilder-azure");
+var sleep = require('system-sleep');
 
 // Setup Restify Server
 
@@ -40,20 +41,18 @@ var bot = new builder.UniversalBot(connector);
 
 bot.dialog('/', [
     function (session) {
-        builder.Prompts.text(session, "Helloha... What's your name?");
+        //var user_id = session.user.id
+        session.send("Welcome to the online service of WellBeing HMO");
+        builder.Prompts.choice(session, "What type of service are you looking for?", "See a doctor now|Schedule an appointment|Renew prescriptions", { listStyle: builder.ListStyle.button });
     },
     function (session, results) {
-        session.userData.name = results.response;
-        builder.Prompts.number(session, "Hi " + results.response + ", How many years have you been coding?"); 
+        session.userData.serviceType = results.response.entity;
+        builder.Prompts.choice(session, "What type of doctor do you like to see?", "General practitioner|Pediatrician|Psychiatrist|General nurse", { listStyle: builder.ListStyle.button });
     },
     function (session, results) {
-        session.userData.coding = results.response;
-        builder.Prompts.choice(session, "What language do you code Node using?", ["JavaScript", "CoffeeScript", "TypeScript"]);
-    },
-    function (session, results) {
-        session.userData.language = results.response.entity;
-        session.send("Got it... " + session.userData.name + 
-                    " you've been programming for " + session.userData.coding + 
-                    " years and use " + session.userData.language + ".");
+        session.userData.doctorType = results.response.entity;
+        session.send("Ok. Searching available " + session.userData.doctorType + "...");
+        sleep(5000);
+        session.send("Doctor Smith is calling you. Please accept the call.\nThank you for using the online service!");
     }
 ]);
