@@ -7,6 +7,7 @@ var builder = require('botbuilder');
 var botbuilder_azure = require("botbuilder-azure");
 var sleep = require('system-sleep');
 
+// 6:51
 // Setup Restify Server
 
 var server = restify.createServer();

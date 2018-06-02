@@ -11,7 +11,8 @@
   "dependencies": {
     "botbuilder": "^3.13.1",
     "botbuilder-azure": "^3.0.4",
-    "restify": "^5.0.0"
+    "restify": "^5.0.0",
+    "system-sleep": "^1.3.6"
   },
   "devDependencies": {
     "request": "^2.81.0",
