@@ -5,7 +5,7 @@ A simple echo bot for the Microsoft Bot Framework.
 var restify = require('restify');
 var builder = require('botbuilder');
 var botbuilder_azure = require("botbuilder-azure");
-//var sleep = require('system-sleep');
+var sleep = require('system-sleep');
 
 // Setup Restify Server
 
@@ -52,7 +52,7 @@ bot.dialog('/', [
     function (session, results) {
         session.userData.doctorType = results.response.entity;
         session.send("Ok. Searching available " + session.userData.doctorType + "...");
-        //sleep(5000);
+        sleep(5000);
         session.send("Doctor Smith is calling you. Please accept the call.\nThank you for using the online service!");
     }
 ]);
