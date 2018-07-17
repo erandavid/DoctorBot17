@@ -45,8 +45,9 @@ bot.on('conversationUpdate', function(message) {
     if (message.membersAdded) {
         message.membersAdded.forEach(function(identity) {
             if (identity.id === message.address.bot.id) {
-                var reply = new builder.Message().address(message.address).text("Welcome to the online service of WellBeing HMO!");
-                bot.send(reply);
+                //var reply = new builder.Message().address(message.address).text("Welcome to the online service of WellBeing HMO!");
+                //bot.send(reply);
+                //bot.beginDialog(message.address, 'main')
             }
         });
     }
@@ -55,6 +56,7 @@ bot.on('conversationUpdate', function(message) {
 bot.dialog('/', [
     function (session) {
         //var user_id = session.user.id
+        session.send("Welcome to the online service of WellBeing HMO!");
         builder.Prompts.choice(session, "What type of service are you looking for?", "See a doctor now|Schedule an appointment|Renew prescriptions", { listStyle: builder.ListStyle.button });
     },
     function (session, results) {
